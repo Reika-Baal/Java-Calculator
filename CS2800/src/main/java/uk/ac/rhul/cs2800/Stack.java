@@ -1,6 +1,8 @@
 package uk.ac.rhul.cs2800;
 
+import java.util.ArrayList;
 import java.util.EmptyStackException;
+import java.util.List;
 
 /**
  * Stack class taking in inputs from the Entry class.
@@ -10,8 +12,7 @@ import java.util.EmptyStackException;
  */
 
 public class Stack {
-  private int size = 0;
-  private Entry[] value = new Entry[10];
+  private List<Entry> value = new ArrayList<>();
 
   /**
    * Method to get the current size of the stack.
@@ -20,7 +21,7 @@ public class Stack {
    */
 
   public int size() {
-    return size;
+    return value.size;
   }
 
   /**
@@ -31,13 +32,7 @@ public class Stack {
 
   // The size of the array is increased if there are more or equal size.
   public void push(Entry entry) {
-    if (size >= value.length) {
-      Entry[] newValue = new Entry[value.length * 2];
-      System.arraycopy(value, 0, newValue, 0, value.length);
-      value = newValue;
-    }
-    value[size] = entry;
-    size++;
+    value.add(entry);
   }
 
   /**
@@ -48,11 +43,10 @@ public class Stack {
    */
 
   public Entry pop() {
-    if (size == 0) {
+    if (value.isEmpty()) {
       throw new EmptyStackException();
     }
-    size--;
-    return value[size];
+    return value.remove(value.size() - 1);
   }
 
   /**
@@ -63,9 +57,9 @@ public class Stack {
    */
 
   public Entry top() {
-    if (size == 0) {
+    if (value.isEmpty()) {
       throw new EmptyStackException();
     }
-    return value[size - 1];
+    return value.get(value.size() - 1);
   }
 }
