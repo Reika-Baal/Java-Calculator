@@ -1,0 +1,81 @@
+package uk.ac.rhul.cs2800;
+
+import java.util.EmptyStackException;
+
+/**
+ * Stack class taking in inputs from the Entry class.
+ * 
+ * @author Pratik
+ *
+ */
+
+public class Stack {
+  int size = 0;
+  Entry[] value = new Entry[10];
+
+  /**
+   * Method to get the current size of the stack.
+   *
+   * @return The current size of the stack
+   */
+
+  public int size() {
+    return size;
+  }
+
+  /**
+   * Push an integer onto the stack by creating a new Entry object with a Float value.
+   *
+   * @param i is the integer that will push onto the stack.
+   */
+
+  public void push(int i) {
+    push(new Entry((float) i));
+  }
+
+  /**
+   * Push an Entry object onto the stack.
+   *
+   * @param entry is The Entry object to push onto the stack.
+   */
+
+  // The size of the array is increased if there are more or equal size.
+  public void push(Entry entry) {
+    if (size >= value.length) {
+      Entry[] newValue = new Entry[value.length * 2];
+      System.arraycopy(value, 0, newValue, 0, value.length);
+      value = newValue;
+    }
+    value[size] = entry;
+    size = size + 1;
+  }
+
+  /**
+   * Pops and returns the top Entry from the stack.
+   *
+   * @return The top Entry on the stack.
+   * @throws EmptyStackException if the stack is empty.
+   */
+
+  public Entry pop() {
+    if (size == 0) {
+      throw new EmptyStackException();
+    }
+    size = size - 1;
+    return value[size];
+  }
+
+  /**
+   * Get the top Entry from the stack without removing it.
+   *
+   * @return The top Entry on the stack.
+   * @throws EmptyStackException if the stack is empty.
+   */
+
+  public Entry top() {
+    if (size == 0) {
+      throw new EmptyStackException();
+    }
+    return value[size - 1];
+  }
+}
