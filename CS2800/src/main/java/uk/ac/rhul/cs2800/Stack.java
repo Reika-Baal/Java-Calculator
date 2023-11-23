@@ -21,7 +21,7 @@ public class Stack {
    */
 
   public int size() {
-    return value.size;
+    return value.size();
   }
 
   /**
@@ -46,8 +46,7 @@ public class Stack {
     if (value.isEmpty()) {
       throw new EmptyStackException();
     }
-    size--; // The size is decreased before  the entry is removed.
-    return value.remove(size);
+    return value.remove(value.size() - 1);//The size decrease should be after the entry is removed not prior.
   }
 
   /**
