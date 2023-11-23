@@ -10,8 +10,8 @@ import java.util.EmptyStackException;
  */
 
 public class Stack {
-  int size = 0;
-  Entry[] value = new Entry[10];
+  private int size = 0;
+  private Entry[] value = new Entry[10];
 
   /**
    * Method to get the current size of the stack.
@@ -21,16 +21,6 @@ public class Stack {
 
   public int size() {
     return size;
-  }
-
-  /**
-   * Push an integer onto the stack by creating a new Entry object with a Float value.
-   *
-   * @param i is the integer that will push onto the stack.
-   */
-
-  public void push(int i) {
-    push(new Entry((float) i));
   }
 
   /**
@@ -47,7 +37,7 @@ public class Stack {
       value = newValue;
     }
     value[size] = entry;
-    size = size + 1;
+    size++;
   }
 
   /**
@@ -61,7 +51,7 @@ public class Stack {
     if (size == 0) {
       throw new EmptyStackException();
     }
-    size = size - 1;
+    size--;
     return value[size];
   }
 
