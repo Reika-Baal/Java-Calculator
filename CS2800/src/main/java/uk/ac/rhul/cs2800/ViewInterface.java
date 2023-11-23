@@ -1,4 +1,4 @@
-package application;
+package uk.ac.rhul.cs2800;
 
 // You can use this file in your second assignment as is - or modify it to suit your code - in which
 // case add another @author tag below mine

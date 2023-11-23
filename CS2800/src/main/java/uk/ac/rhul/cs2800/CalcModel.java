@@ -1,4 +1,4 @@
-package application;
+package uk.ac.rhul.cs2800;
 
 /**
  * Evaluates an expression - the evaluation can be Standard (infix) or reverse polish.

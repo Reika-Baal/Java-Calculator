@@ -1,4 +1,4 @@
-package application;
+package uk.ac.rhul.cs2800;
 
 /**
  * A calculator capable of decoding a String as an arithmetic expression and evaluating the answer.

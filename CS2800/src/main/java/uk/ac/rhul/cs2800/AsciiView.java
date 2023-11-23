@@ -1,4 +1,4 @@
-package application;
+package uk.ac.rhul.cs2800;
 
 import java.util.Scanner;
 import java.util.function.Consumer;

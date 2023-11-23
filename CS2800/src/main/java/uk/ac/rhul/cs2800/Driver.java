@@ -1,4 +1,4 @@
-package application;
+package uk.ac.rhul.cs2800;
 
 /**
  * A driver class that sets up the MVC framework and begins the application.

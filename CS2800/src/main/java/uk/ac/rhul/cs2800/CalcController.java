@@ -1,4 +1,4 @@
-package application;
+package uk.ac.rhul.cs2800;
 
 /**
  * The controller that sits between the calculator model that does actual evaluation and the view

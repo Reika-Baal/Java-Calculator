@@ -1,4 +1,4 @@
-package application;
+package uk.ac.rhul.cs2800;
 
 import java.io.IOException;
 import java.util.function.Consumer;
