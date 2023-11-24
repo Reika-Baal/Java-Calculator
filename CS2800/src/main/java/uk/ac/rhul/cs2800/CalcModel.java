@@ -76,6 +76,10 @@ public class CalcModel implements Calculator {
     }
   }
 
+  float evaluateReversePolish(String expression) throws InvalidExpression {
+    return 0.0f; // Placeholder for when I do more research into this and work on it.
+  }
+
   private float applyOperator(float operand1, float operand2, Symbol operator) {
     switch (operator) {
       case PLUS:

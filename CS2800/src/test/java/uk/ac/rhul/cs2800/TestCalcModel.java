@@ -36,6 +36,15 @@ class TestCalcModel {
   }
 
   @Test
+  void testEvaluateReversePolish() throws InvalidExpression {
+    // Test valid reverse polish expression
+    assertEquals(6.0f, calcModel.evaluateReversePolish("2 4 +"));
+
+    // Test invalid reverse polish expression
+    assertThrows(InvalidExpression.class, () -> calcModel.evaluateReversePolish("2 4 + +"));
+  }
+
+  @Test
   void testInvalidExpression() {
     // Test if InvalidExpression is thrown for an invalid expression
     assertThrows(InvalidExpression.class, () -> calcModel.evaluateInfix("invalid expression"));
@@ -51,5 +60,11 @@ class TestCalcModel {
   void testEvaluateWithInvalidType() {
     // Test if BadType exception is thrown for invalid type in the expression
     assertThrows(InvalidExpression.class, () -> calcModel.evaluate("2 + A", true));
+  }
+
+  @Test
+  void testDivisionByZero() {
+    // Test if ArithmeticException is thrown for division by zero
+    assertThrows(ArithmeticException.class, () -> calcModel.evaluate("2 / 0", true));
   }
 }
