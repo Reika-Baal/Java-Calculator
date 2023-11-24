@@ -24,6 +24,8 @@ public interface ViewInterface {
   void addCalculateObserver(Runnable f);
 
   /**
+   * 
+   * 
    * Add the method to tell the controller the type of calculation to do.
    * 
    * @param c the method to do the calculation takes an OpType argument and returns no value

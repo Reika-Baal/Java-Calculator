@@ -93,6 +93,16 @@ public class Entry {
   }
 
   /**
+   * Gets the Type to work with CalcModel.
+   * 
+   * @return the Type which is stored in the desired data I'm trying to access.
+   */
+
+  public Type getType() {
+    return type;
+  }
+
+  /**
    * Check if this Entry is equal to another object.
    *
    * @param o being The object that will compare with this Entry.
