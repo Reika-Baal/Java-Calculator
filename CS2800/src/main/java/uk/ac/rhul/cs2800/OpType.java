@@ -1,8 +1,26 @@
 package uk.ac.rhul.cs2800;
 
 /**
- * Codifies the types of expression that we can calculate.
+ * Enumeration class for the Types of calculation supported by the calculator.
+ * 
+ * @author Pratik
+ *
  */
 public enum OpType {
-  STANDARD, REV_POLISH
+  /**
+   * Standard infix notation.
+   */
+
+  STANDARD,
+
+  /**
+   * Reverse Polish Notation.
+   */
+
+  REV_POLISH;
+
+  @Override
+  public String toString() {
+    return name();
+  }
 }
