@@ -4,6 +4,12 @@ import java.util.Stack;
 
 public class CalcModel implements Calculator {
 
+  private boolean infixMode = true;
+
+  public void setInfixMode(boolean infix) {
+    this.infixMode = infix;
+  }
+
   @Override
   public float evaluate(String expression, Boolean infix) throws InvalidExpression {
     Stack<Entry> stack = new Stack<>();

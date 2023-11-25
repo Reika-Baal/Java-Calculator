@@ -21,7 +21,12 @@ public class CalcController {
   }
 
   private void handleTypeChange(OpType type) {
-    // Will work on this in correlation with OpType
+    if (type == OpType.STANDARD) {
+      myModel.setInfixMode(true);
+    } else if (type == OpType.REV_POLISH) {
+      myModel.setInfixMode(false);
+    }
+    myView.setAnswer("Switched to " + type + " mode");
   }
 
   CalcController(CalcModel model, ViewInterface view) {
