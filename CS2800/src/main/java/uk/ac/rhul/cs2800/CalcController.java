@@ -5,12 +5,33 @@ package uk.ac.rhul.cs2800;
  * that is the part the user interfaces with.
  */
 public class CalcController {
+
   private CalcModel myModel;
-  private ViewInterface myView;
+  ViewInterface myView;
 
-  private void handleCalculation() {}
+  private void handleCalculation() {
+    try {
+      String expression = myView.getExpression();
+      boolean infix = true;
+      float result = myModel.evaluate(expression, infix);
+      myView.setAnswer(Float.toString(result));
+    } catch (InvalidExpression | ArithmeticException e) {
+      myView.setAnswer("Error: " + e.getMessage());
+    }
+  }
 
-  private void handleTypeChange() {}
+  private void handleTypeChange(OpType type) {
+    // Will work on this in correlation with OpType
+  }
 
-  CalcController(CalcModel model, ViewInterface view) {}
+  CalcController(CalcModel model, ViewInterface view) {
+    this.myModel = model; // represents the view interface through which the controller interacts
+                          // with the UI. Used for receiving inputs and displaying the outcome.
+    this.myView = view;
+
+    myView.addCalculateObserver(() -> handleCalculation());
+    myView.addTypeObserver((type) -> handleTypeChange(type));
+
+    myView.startView();
+  }
 }
