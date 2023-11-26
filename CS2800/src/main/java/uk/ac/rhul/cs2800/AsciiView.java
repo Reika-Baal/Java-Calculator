@@ -6,6 +6,9 @@ import java.util.function.Consumer;
 /**
  * Skeleton code for a terminal based calculator that reads an expression from the user and
  * evaluates it and prints out the answer.
+ *  
+ * @author Dave Cohen (d.cohen@rhul.ac.uk)
+ * 
  */
 public class AsciiView implements ViewInterface {
   // The current question that the calculator must solve: entered like ?3*(5+4)
