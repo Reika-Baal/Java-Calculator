@@ -1,22 +1,25 @@
 package uk.ac.rhul.cs2800;
 
-import java.io.IOException;
-import java.util.function.Consumer;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
-import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import java.io.IOException;
+import java.util.function.Consumer;
 
-/**
- * This class provides a resizeable JavaFx GUI for the calculator MVC.
- */
+// https://docs.oracle.com/javafx/2/get_started/fxml_tutorial.htm
+// https://www.youtube.com/watch?v=Dbb69NiQHso
+// https://www.opensourceforu.com/2017/07/developing-basic-gui-application-using-javafx-eclipse/
+// primary sources used alongside @author Dave Cohen to try encapsulate the GUI logic and provide
+// methods for the controller.
 
 public class CalcView extends Application implements ViewInterface {
+
   @FXML
   private Button calcButton;
 
@@ -31,11 +34,6 @@ public class CalcView extends Application implements ViewInterface {
 
   @FXML
   private TextField totalField;
-
-  // Methods for registering an observer and for
-  // accessing user data in the UI
-  // These methods build the Observer/Observable pattern
-
 
   @Override
   public void addCalculateObserver(Runnable f) {
@@ -60,19 +58,25 @@ public class CalcView extends Application implements ViewInterface {
 
   @Override
   public void startView() {
-    calcButton.setDisable(false);
-    revPolishCalculatorButton.setDisable(false);
-    infixCalculatorButton.setDisable(false);
+    Stage stage = new Stage();
+    try {
+      FXMLLoader loader = new FXMLLoader(getClass().getResource("View.fxml"));
+      loader.setController(this);
+      Parent root = loader.load();
+      Scene scene = new Scene(root);
+      stage.setScene(scene);
+      stage.setTitle("Calculator");
+      stage.show();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 
   @Override
-  public void start(Stage primaryStage) throws IOException {
-    GridPane page = (GridPane) FXMLLoader.load(CalcView.class.getResource("View.fxml"));
-    Scene scene = new Scene(page);
-    scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-    primaryStage.setScene(scene);
-    primaryStage.setTitle("MVC/Observer/fxml");
-    primaryStage.show();
+  public void start(Stage primaryStage) {}
+
+  public static void main(String[] args) {
+    launch(args);
   }
 
   // DO NOT CHANGE ANYTHING BELOW THIS COMMENT
