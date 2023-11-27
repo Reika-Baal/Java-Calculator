@@ -1,5 +1,6 @@
 package uk.ac.rhul.cs2800;
 
+import java.util.EmptyStackException;
 import java.util.Stack;
 
 public class CalcModel implements Calculator {
@@ -83,8 +84,41 @@ public class CalcModel implements Calculator {
   }
 
   float evaluateReversePolish(String expression) throws InvalidExpression {
-    return 0.0f; // Placeholder for when I do more research into this and work on it.
+    Stack<Entry> stack = new Stack<>();
+
+    try {
+      for (String tokenStr : expression.split("\\s+")) {
+        Entry token = new Entry(tokenStr);
+        switch (token.getType()) {
+          case NUMBER:
+            stack.push(token);
+            break;
+          case SYMBOL:
+            try {
+              float operand2 = stack.pop().getNumber();
+              float operand1 = stack.pop().getNumber();
+              float result = applyOperator(operand1, operand2, token.getSymbol());
+              stack.push(new Entry(result));
+            } catch (EmptyStackException e) {
+              throw new InvalidExpression("Invalid expression: not enough operands");
+            }
+            break;
+          default:
+            throw new InvalidExpression("Invalid token: " + tokenStr);
+        }
+      }
+
+      Entry resultEntry = stack.pop();
+      if (stack.size() != 0 || resultEntry.getType() != Type.NUMBER) {
+        throw new InvalidExpression("Invalid expression");
+      }
+
+      return resultEntry.getNumber();
+    } catch (BadType e) {
+      throw new InvalidExpression("Invalid expression: " + e.getMessage());
+    }
   }
+
 
   private float applyOperator(float operand1, float operand2, Symbol operator) {
     switch (operator) {
