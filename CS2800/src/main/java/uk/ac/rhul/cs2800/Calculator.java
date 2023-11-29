@@ -2,6 +2,8 @@ package uk.ac.rhul.cs2800;
 
 /**
  * A calculator capable of decoding a String as an arithmetic expression and evaluating the answer.
+ * 
+ * @author Dave Cohen (d.cohen@rhul.ac.uk)
  */
 public interface Calculator {
 
