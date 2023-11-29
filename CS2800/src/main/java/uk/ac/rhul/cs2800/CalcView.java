@@ -20,7 +20,8 @@ import java.util.function.Consumer;
 // methods for the controller.
 
 /**
- * 
+ * The CalcView class responsible for making the actions of the buttons work with the other files as
+ * well as ensure the JavaFX is working correctly.
  * 
  * @author Pratik
  *
