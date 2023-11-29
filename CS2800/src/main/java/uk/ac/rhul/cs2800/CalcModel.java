@@ -3,13 +3,31 @@ package uk.ac.rhul.cs2800;
 import java.util.EmptyStackException;
 import java.util.Stack;
 
-public class CalcModel implements Calculator {
+/**
+ * CalcModel class being the implementation of the calculator. This is used to evaluate mathematical
+ * expressions in the Infix and the Reverse Polish notations. The default in this cause being the
+ * infix notation.
+ * 
+ * @author Pratik
+ *
+ */
 
+public class CalcModel implements Calculator {
   private boolean infixMode = true;
+
+  /**
+   * Used to set the notation of the Calculator from infix to Reverse Polish.
+   * 
+   * @param infix true if the user wants infix mode, and false if Reverse Polish is desired.
+   */
 
   public void setInfixMode(boolean infix) {
     this.infixMode = infix;
   }
+
+  /**
+   * The method used to evaluate the mathematical expression when it is in 'string'.
+   */
 
   @Override
   public float evaluate(String expression, Boolean infix) throws InvalidExpression {
@@ -32,6 +50,14 @@ public class CalcModel implements Calculator {
     }
   }
 
+  /**
+   * This is another method used to aid the evaluation of expressions in the infix notation.
+   * 
+   * @param stack is the stack that is used for the expression evaluated.
+   * @throws InvalidExpression is thrown when the expression either could not be evaluated or is
+   *         invalid.
+   */
+
   private void evaluateExpression(Stack<Entry> stack) throws InvalidExpression {
     try {
       while (stack.size() >= 3 && stack.peek().getType() == Type.NUMBER) {
@@ -51,6 +77,15 @@ public class CalcModel implements Calculator {
       throw new InvalidExpression("Invalid expression: " + e.getMessage());
     }
   }
+
+  /**
+   * Evaluation of the mathematical expression in the infix notation i.e the Standard notation.
+   * 
+   * @param expression The infix mathematical expression that will be evaluated.
+   * @return The result of the evaluation.
+   * @throws InvalidExpression is thrown when the expression either could not be evaluated or is
+   *         invalid.
+   */
 
   float evaluateInfix(String expression) throws InvalidExpression {
     Stack<Entry> stack = new Stack<>();
@@ -82,6 +117,16 @@ public class CalcModel implements Calculator {
       throw new InvalidExpression("Invalid expression: " + e.getMessage());
     }
   }
+
+  /**
+   * Evaluation of the mathematical expression in the Reverse Polish notation.
+   * 
+   * @param expression Using the Reverse Polish notation it is the mathematical expression that we
+   *        want to evaluate.
+   * @return The result of the evaluation.
+   * @throws InvalidExpression is thrown when the expression either could not be evaluated or is
+   *         invalid.
+   */
 
   float evaluateReversePolish(String expression) throws InvalidExpression {
     Stack<Entry> stack = new Stack<>();
@@ -119,6 +164,17 @@ public class CalcModel implements Calculator {
     }
   }
 
+  /**
+   * Used to apply mathematical operator to the two operands.
+   * 
+   * @param operand1 The first operand in which the operation is applied to. This can be understood
+   *        as the first variable.
+   * @param operand2 The second operand in which the operation is applied to. This can be understood
+   *        as the second variable.
+   * @param operator The value that is recalled in order to provide further clarification on the
+   *        error.
+   * @return is the result of applying the operator to the operands.
+   */
 
   private float applyOperator(float operand1, float operand2, Symbol operator) {
     switch (operator) {
