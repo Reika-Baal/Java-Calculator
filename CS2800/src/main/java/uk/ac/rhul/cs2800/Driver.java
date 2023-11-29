@@ -2,6 +2,9 @@ package uk.ac.rhul.cs2800;
 
 /**
  * A driver class that sets up the MVC framework and begins the application.
+ * 
+ * @author Dave Cohen (d.cohen@rhul.ac.uk)
+ * 
  */
 public class Driver {
 
