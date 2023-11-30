@@ -13,6 +13,7 @@ import java.util.Stack;
  */
 
 public class CalcModel implements Calculator {
+  @SuppressWarnings("unused")
   private boolean infixMode = true;
 
   /**
