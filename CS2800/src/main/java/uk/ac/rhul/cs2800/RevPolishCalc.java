@@ -5,7 +5,7 @@ import java.util.EmptyStackException;
 // **Credits**
 // https://en.wikipedia.org/wiki/Reverse_Polish_notation
 // https://www.dcode.fr/reverse-polish-notation
-// https://codereview.stackexchange.com/questions/120451/reverse-polish-notation-calculator-in-java
+// (3) https://codereview.stackexchange.com/questions/120451/reverse-polish-notation-calculator-in-java
 // These are the main sites I used to aid me in this aspect of the code as I was unfamiliar with
 // ReversePolish.
 
@@ -44,7 +44,7 @@ public class RevPolishCalc {
     for (String tokenStr : expression.split("\\s+")) {
       System.out.print(tokenStr + "\t");
 
-      try {
+      try { //3
         Symbol token = Symbol.valueOf(tokenStr);
         switch (token) {
           case PLUS:
