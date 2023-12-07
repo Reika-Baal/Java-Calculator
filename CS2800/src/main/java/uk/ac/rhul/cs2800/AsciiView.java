@@ -4,34 +4,47 @@ import java.util.Scanner;
 import java.util.function.Consumer;
 
 /**
- * Skeleton code for a terminal based calculator that reads an expression from the user and
+ * Skeleton code for a terminal-based calculator that reads an expression from the user and
  * evaluates it and prints out the answer.
- *  
- * @author Dave Cohen (d.cohen@rhul.ac.uk)
  * 
+ * @author Dave Cohen (d.cohen@rhul.ac.uk)
  */
+
 public class AsciiView implements ViewInterface {
-  // The current question that the calculator must solve: entered like ?3*(5+4)
+
   private String question;
+  private Runnable doCalculation = null;
+  private Consumer<OpType> setCalculatorType = null;
 
-  // This method will be injected so we can ask the controller to calculate
-  Runnable doCalculation = null;
-
-  // This method changes how the calculator will evaluate the question
-  Consumer<OpType> setCalculatorType = null;
-
-
+  /**
+   * Displays the menu and handles user input for the terminal-based calculator.
+   */
   private void menu() {
-    Scanner s = new Scanner(System.in);
+    Scanner scanner = new Scanner(System.in);
     boolean finished = false;
     help();
 
-    while (!finished && s.hasNext()) {
-      String t = s.next();
-      switch (t.toUpperCase().charAt(0)) {
-        case 'C': // Ask the controller to calculate
+    while (!finished && scanner.hasNext()) {
+      String userInput = scanner.next();
+      switch (userInput.toUpperCase().charAt(0)) {
+        case 'C':
+          if (doCalculation != null) {
+            doCalculation.run();
+          }
           break;
-        case '?': // Set current question
+        case '?':
+          System.out.print("Enter expression: ");
+          question = scanner.nextLine().trim();
+          break;
+        case 'S':
+          if (setCalculatorType != null) {
+            setCalculatorType.accept(OpType.STANDARD);
+          }
+          break;
+        case 'R':
+          if (setCalculatorType != null) {
+            setCalculatorType.accept(OpType.REV_POLISH);
+          }
           break;
         case 'Q':
           System.out.println("Bye");
@@ -41,7 +54,7 @@ public class AsciiView implements ViewInterface {
           help();
       }
     }
-    s.close();
+    scanner.close();
   }
 
   private void help() {
@@ -55,23 +68,26 @@ public class AsciiView implements ViewInterface {
 
   @Override
   public String getExpression() {
-    return "0";
+    return question;
   }
 
   @Override
   public void setAnswer(String answer) {
-    System.out.println("Answer is just around the corner");
+    System.out.println("Answer: " + answer);
   }
 
   @Override
-  public void addCalculateObserver(Runnable f) {}
+  public void addCalculateObserver(Runnable f) {
+    doCalculation = f;
+  }
 
   @Override
-  public void addTypeObserver(Consumer<OpType> c) {}
+  public void addTypeObserver(Consumer<OpType> c) {
+    setCalculatorType = c;
+  }
 
   @Override
   public void startView() {
     menu();
   }
-
 }
